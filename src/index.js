@@ -5,8 +5,8 @@ import App from "./components/App";
 
 const root = ReactDom.createRoot(document.getElementById("root"));
 
-root.render(<App />);
 //2. Create a App.jsx component.
+root.render(<App />);
 //3. Create a Header.jsx component that renders a <header> element
 //to show the Keeper App name in an <h1>.
 //4. Create a Footer.jsx component that renders a <footer> element
