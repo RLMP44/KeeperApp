@@ -24,6 +24,8 @@ function CreateArea(props) {
         },
       ];
     });
+    setTitleText("");
+    setContentText("");
     event.preventDefault();
   }
 
@@ -40,6 +42,7 @@ function CreateArea(props) {
           onChange={handleContentChange}
           name="content"
           placeholder="Take a note..."
+          value={contentText}
           rows="3"
         />
         <button onClick={handleClick}>Add</button>
