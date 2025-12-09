@@ -1,6 +1,11 @@
 import React, { useState } from "react";
+import AddIcon from "@mui/icons-material/Add";
+import { Fab } from "@mui/material";
+import { Zoom } from "@mui/material";
 
 function CreateArea(props) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [isMouseOver, setIsMouseOver] = useState(false);
   const [note, setNote] = useState({
     title: "",
     content: "",
@@ -24,23 +29,46 @@ function CreateArea(props) {
     event.preventDefault();
   }
 
+  function expandBox() {
+    setIsExpanded(true);
+  }
+
+  function handleHoverEffect() {
+    setIsMouseOver((prevValue) => {
+      return !prevValue;
+    });
+  }
+
   return (
     <div>
-      <form>
-        <input
-          onChange={handleChange}
-          name="title"
-          placeholder="Title"
-          value={note.title}
-        />
+      <form className="create-note">
+        {isExpanded && (
+          <input
+            onChange={handleChange}
+            name="title"
+            placeholder="Title"
+            value={note.title}
+          />
+        )}
         <textarea
           onChange={handleChange}
+          onClick={expandBox}
           name="content"
           placeholder="Take a note..."
           value={note.content}
-          rows="3"
+          rows={isExpanded ? 3 : 1}
         />
-        <button onClick={handleClick}>Add</button>
+        <Zoom in={isExpanded}>
+          <Fab
+            style={isMouseOver ? { backgroundColor: "grey" } : {}}
+            className="add-button"
+            onClick={handleClick}
+            onMouseOver={handleHoverEffect}
+            onMouseOut={handleHoverEffect}
+          >
+            <AddIcon />
+          </Fab>
+        </Zoom>
       </form>
     </div>
   );

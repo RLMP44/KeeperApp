@@ -4,6 +4,8 @@ import Footer from "./Footer";
 import Note from "./Note";
 import storedNotes from "../notes";
 import CreateArea from "./CreateArea";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 function App() {
   const [notes, setNotes] = useState(storedNotes);
@@ -33,18 +35,20 @@ function App() {
   }
 
   return (
-    <div>
+    <div className="main">
       <Header />
       <CreateArea addNote={addNote} />
-      {notes.map((note) => (
-        <Note
-          key={note.id}
-          id={note.id}
-          title={note.title}
-          content={note.content}
-          deleteNote={deleteNote}
-        />
-      ))}
+      <div className="notes-container">
+        {notes.map((note) => (
+          <Note
+            key={note.id}
+            id={note.id}
+            title={note.title}
+            content={note.content}
+            deleteNote={deleteNote}
+          />
+        ))}
+      </div>
       <Footer />
     </div>
   );
