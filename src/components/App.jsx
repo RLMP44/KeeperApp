@@ -17,6 +17,7 @@ function App() {
           id={note.id}
           title={note.title}
           content={note.content}
+          setNotes={setNotes}
         />
       ))}
       <Footer />
