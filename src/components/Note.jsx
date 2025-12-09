@@ -1,19 +1,15 @@
 import React from "react";
 
 function Note(props) {
-  function deleteNote() {
-    props.setNotes((prevValues) => {
-      return prevValues.filter((value) => {
-        return value.id !== props.id;
-      });
-    });
+  function handleClick() {
+    props.deleteNote(props.id)
   }
 
   return (
     <div className="note">
       <h1>{props.title}</h1>
       <p>{props.content}</p>
-      <button onClick={deleteNote}>DELETE</button>
+      <button onClick={handleClick}>DELETE</button>
     </div>
   );
 }

@@ -1,31 +1,26 @@
 import React, { useState } from "react";
 
 function CreateArea(props) {
-  const [titleText, setTitleText] = useState("");
-  const [contentText, setContentText] = useState("");
-  function handleTitleChange(event) {
-    setTitleText(event.target.value);
-  }
-  function handleContentChange(event) {
-    setContentText(event.target.value);
-  }
-  function handleClick(event) {
-    props.setNotes((prevNotes) => {
-      var lastID = prevNotes.at(-1).id;
-      var nextID = lastID + 1;
+  const [note, setNote] = useState({
+    title: "",
+    content: "",
+    id: null,
+  });
 
-      return [
-        ...prevNotes,
-        {
-          key: nextID,
-          id: nextID,
-          title: titleText,
-          content: contentText,
-        },
-      ];
+  function handleChange(event) {
+    const { name, value } = event.target;
+
+    setNote((prevValues) => {
+      return {
+        ...prevValues,
+        [name]: value,
+      };
     });
-    setTitleText("");
-    setContentText("");
+  }
+
+  function handleClick(event) {
+    props.addNote(note);
+    setNote({ title: "", content: "", id: null });
     event.preventDefault();
   }
 
@@ -33,16 +28,16 @@ function CreateArea(props) {
     <div>
       <form>
         <input
-          onChange={handleTitleChange}
+          onChange={handleChange}
           name="title"
           placeholder="Title"
-          value={titleText}
+          value={note.title}
         />
         <textarea
-          onChange={handleContentChange}
+          onChange={handleChange}
           name="content"
           placeholder="Take a note..."
-          value={contentText}
+          value={note.content}
           rows="3"
         />
         <button onClick={handleClick}>Add</button>
